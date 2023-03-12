@@ -1,4 +1,4 @@
-# Github Search App to Perform serching, sorting and using pagination to diaply the apps
+# Github Search App to Perform serching, sorting and using pagination to diaply the repository data in tiles
 This is a simple frontend application built with React and JavaScript that allows users to search the github for specific terms and list the repository as tiles.
 
 ## How to Start?
