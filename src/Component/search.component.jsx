@@ -330,7 +330,7 @@ function App() {
 
                       <button
                         className={`${classes.nextButton} ${
-                          totalPage === 1 && classes.disabled
+                          (totalPage === 1 || totalPage === page) && classes.disabled
                         }`}
                         onClick={(e) => {
                           handleButtonClick(e, "next");
