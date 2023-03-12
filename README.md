@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Github Search App to Perform serching, sorting and using pagination to diaply the apps
+This is a simple frontend application built with React and JavaScript that allows users to search the github for specific terms and list the repository as tiles.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to Start?
+To get started with the app, follow the steps below:
 
-## Available Scripts
+- Clone the repository to your local machine using the command :
+```git clone https://github.com/RishabhMishra76/GitSearch.git```
+- Navigate to the project directory in your terminal using the command:
+```cd GitSearch```
+- Install the required dependencies by running the command:
+```npm i```
+- Once the dependencies have been installed, start the app by running:
+```npm start```
 
-In the project directory, you can run:
+This will start the app in development mode and you can access it in your browser by visiting http://localhost:3000.
 
-### `npm start`
+## Features
+The app has the following features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Search all repository on github using a search string.
+- Sort the data based on Stars, Watchers Count, Score, Name, Created At, Updated At
+- Can choose "ASC" for ascending and "DESC" for descending to manage sort order.
+- Choose the repos to be displayed at once(repos per page).
+- Use pagination to change pages.
+- Click on the tile to go to the repo.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+The app was built using the following technologies:
 
-### `npm test`
+- React.js
+- MUI
+- React Hooks
+- Javascript
+- HTML
+- CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contribution
+If you find any issues with the app or would like to contribute to its development, please feel free to create a pull request or raise an issue on the GitHub repository.
 
-### `npm run build`
+## Live Demo
+Live demo is hosted using vercel: [Github Search](https://git-search-wheat-psi.vercel.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Credits
+This application was built by [Rishabh Mishra](https://github.com/RishabhMishra76).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Happy coding!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Searching](https://user-images.githubusercontent.com/32570766/224533957-e242ff24-93b1-425a-b063-8840042fd1ec.png)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Pagination](https://user-images.githubusercontent.com/32570766/224534020-ecff3c74-c403-43ee-b86a-cfc462d13e59.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Sorting](https://user-images.githubusercontent.com/32570766/224534098-f49bc5b8-ccea-47e1-87d1-6d9d0d7b1248.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
