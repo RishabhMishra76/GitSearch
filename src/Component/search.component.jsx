@@ -3,6 +3,7 @@ import classes from "./search.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import CloseIcon from "../Assets/close.svg";
 import {
   FaSearch,
   FaExclamationCircle,
@@ -41,6 +42,8 @@ function App() {
   const [page, setPage] = useState(1);
   const [sortType, setSortType] = useState("desc");
   const [hovered, setHovered] = useState(Array(repos.length).fill(false));
+  const [modal, setModal] = useState(false);
+  const [currentRepo, setCurrentRepo] = useState(null);
 
   const handleSearch = useCallback(async () => {
     setIsFetching(true);
@@ -88,6 +91,17 @@ function App() {
     setPage(val);
   };
 
+  const openModal = (repo) => {
+    setCurrentRepo(repo);
+    setModal(true);
+  };
+
+  const closeModal = (e) => {
+    e.preventDefault()
+    setCurrentRepo(null);
+    setModal(false);
+  };
+
   const handleSort = (event) => {
     setSortOption(event.target.value);
   };
@@ -101,13 +115,13 @@ function App() {
     const newHovered = [...hovered];
     newHovered[index] = true;
     setHovered(newHovered);
-  }
-  
-  const handleMouseLeave =(index) => {
+  };
+
+  const handleMouseLeave = (index) => {
     const newHovered = [...hovered];
     newHovered[index] = false;
     setHovered(newHovered);
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -192,79 +206,145 @@ function App() {
                     Total {totalSearchResults} results were found
                   </p>
                 )}
+                {modal && (
+                  <div className={classes.modal}>
+                    <div className={classes.modalContent}>
+                      <img
+                        className={classes.closeIcon}
+                        src={CloseIcon}
+                        alt="Close Modal Icon"
+                        onClick={closeModal}
+                      />
+                      <BootstrapTooltip title={currentRepo?.owner?.login}>
+                        <img
+                          src={currentRepo?.owner?.avatar_url}
+                          alt="avatar"
+                          className={classes.avatar}
+                        />
+                      </BootstrapTooltip>
+                      <div className={classes.details}>
+                        <div className={classes.headDesc}>
+                          <div className={classes.together}>
+                            <img
+                              className={classes.headerIcon}
+                              src={Repo}
+                              alt="Repository Icon"
+                            />
+                            <BootstrapTooltip title={currentRepo?.name}>
+                              <h2 className={classes.name}>
+                                {currentRepo?.name}
+                              </h2>
+                            </BootstrapTooltip>
+                          </div>
+                          <br />
+                          <p className={`${classes.description}`}>
+                            <strong>Description:</strong>{" "}
+                            {currentRepo?.description
+                              ? currentRepo?.description
+                              : "N/A"}
+                          </p>
+                        </div>
+                        <br />
+                        <div className={classes.sameLine}>
+                          <div className={classes.together}>
+                            <img
+                              className={classes.icons}
+                              src={Star}
+                              alt="Stars"
+                            />
+                            <span className={classes.stars}>
+                              {currentRepo?.stargazers_count}
+                            </span>
+                          </div>
+                          <div className={classes.together}>
+                            <img
+                              className={classes.icons}
+                              src={Code}
+                              alt="Coding Language"
+                            />
+                            <span className={classes.language}>
+                              {currentRepo?.language
+                                ? currentRepo?.language
+                                : "N/A"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 {repos?.length > 0 ? (
                   <>
                     <div className={classes.cardList}>
                       {repos.map((repo, index) => (
-                        <a href={repo?.html_url} rel="noreferrer" target="_blank">
-                          <div
-                            key={repo.id}
-                            className={classes.card}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={() => handleMouseLeave(index)}
-                          >
-                            <BootstrapTooltip title={repo?.owner?.login}>
-                              <img
-                                src={repo?.owner?.avatar_url}
-                                alt="avatar"
-                                className={classes.avatar}
-                              />
-                            </BootstrapTooltip>
+                        // <a key={repo?.html_url} href={repo?.html_url} rel="noreferrer" target="_blank">
+                        <div
+                          key={repo.id}
+                          className={classes.card}
+                          onClick={() => {
+                            openModal(repo);
+                          }}
+                          onMouseEnter={() => handleMouseEnter(index)}
+                          onMouseLeave={() => handleMouseLeave(index)}
+                        >
+                          <BootstrapTooltip title={repo?.owner?.login}>
+                            <img
+                              src={repo?.owner?.avatar_url}
+                              alt="avatar"
+                              className={classes.avatar}
+                            />
+                          </BootstrapTooltip>
 
-                            <div className={classes.details}>
-                              <div className={classes.headDesc}>
-                                <div className={classes.together}>
-                                  <img
-                                    className={classes.headerIcon}
-                                    src={Repo}
-                                    alt="Repository Icon"
-                                  />
-                                  <BootstrapTooltip title={repo?.name}>
-                                    <h2 className={classes.name}>
-                                      {repo?.name}
-                                    </h2>
-                                  </BootstrapTooltip>
-                                </div>
-                                <br />
-                                <p
-                                  className={`${classes.description} ${
-                                    classes.ellipsis
-                                  } ${
-                                    hovered[index] && classes.descriptionHover
-                                  }`}
-                                >
-                                  <strong>Description:</strong>{" "}
-                                  {repo?.description
-                                    ? repo?.description
-                                    : "N/A"}
-                                </p>
+                          <div className={classes.details}>
+                            <div className={classes.headDesc}>
+                              <div className={classes.together}>
+                                <img
+                                  className={classes.headerIcon}
+                                  src={Repo}
+                                  alt="Repository Icon"
+                                />
+                                <BootstrapTooltip title={repo?.name}>
+                                  <h2 className={classes.name}>{repo?.name}</h2>
+                                </BootstrapTooltip>
                               </div>
                               <br />
-                              <div className={classes.sameLine}>
-                                <div className={classes.together}>
-                                  <img
-                                    className={classes.icons}
-                                    src={Star}
-                                    alt="Stars"
-                                  />
-                                  <span className={classes.stars}>
-                                    {repo?.stargazers_count}
-                                  </span>
-                                </div>
-                                <div className={classes.together}>
-                                  <img
-                                    className={classes.icons}
-                                    src={Code}
-                                    alt="Coding Language"
-                                  />
-                                  <span className={classes.language}>
-                                    {repo?.language ? repo?.language : "N/A"}
-                                  </span>
-                                </div>
+                              <p
+                                className={`${classes.description} ${
+                                  classes.ellipsis
+                                } ${
+                                  hovered[index] && classes.descriptionHover
+                                }`}
+                              >
+                                <strong>Description:</strong>{" "}
+                                {repo?.description ? repo?.description : "N/A"}
+                              </p>
+                            </div>
+                            <br />
+                            <div className={classes.sameLine}>
+                              <div className={classes.together}>
+                                <img
+                                  className={classes.icons}
+                                  src={Star}
+                                  alt="Stars"
+                                />
+                                <span className={classes.stars}>
+                                  {repo?.stargazers_count}
+                                </span>
+                              </div>
+                              <div className={classes.together}>
+                                <img
+                                  className={classes.icons}
+                                  src={Code}
+                                  alt="Coding Language"
+                                />
+                                <span className={classes.language}>
+                                  {repo?.language ? repo?.language : "N/A"}
+                                </span>
                               </div>
                             </div>
                           </div>
-                        </a>
+                        </div>
+                        // </a>
                       ))}
                     </div>
                     <div className={classes.paginationFooter}>
@@ -330,7 +410,8 @@ function App() {
 
                       <button
                         className={`${classes.nextButton} ${
-                          (totalPage === 1 || totalPage === page) && classes.disabled
+                          (totalPage === 1 || totalPage === page) &&
+                          classes.disabled
                         }`}
                         onClick={(e) => {
                           handleButtonClick(e, "next");
